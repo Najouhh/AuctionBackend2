@@ -34,21 +34,7 @@ namespace AuktionBackend.Controllers
         }
 
         [HttpGet("GetAuctionByID")]
-        //public IActionResult GetAuctionByID(int auctionID)
-        //{
-        //    var ExistingAuction = _AuctionRepo.GetAllAuctions();
-        //    var ExistingBids = _BidRepo.GetBids();
-        //    if (ExistingBids.Any(b => b.Auction.AuctionId == auctionID))
-        //    {
-        //        if (ExistingBids.Any(b => b.Auction.EndDate > DateTime.Now))
-        //        {
-        //            var highestWinningBid = ExistingBids.OrderByDescending(b => b.Price).FirstOrDefault();
-        //        }
-
-        //        var auction = _AuctionRepo.GetAuctionByID(auctionID);
-        //        return Ok(auction);
-        //    }
-        //}
+       
         public IActionResult GetAuctionByID(int auctionID)
         {
 
@@ -56,7 +42,6 @@ namespace AuktionBackend.Controllers
                 return Ok(auction);
             
         }
-
 
 
         [Authorize]

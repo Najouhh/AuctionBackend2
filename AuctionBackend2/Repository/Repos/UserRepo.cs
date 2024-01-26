@@ -45,7 +45,6 @@ namespace AuktionBackend.Repository.Repos
                     user.Username,
                     user.Password
 
-
                 };
 
                 db.Execute("InsertUser", parameters, commandType: CommandType.StoredProcedure);

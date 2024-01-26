@@ -21,47 +21,7 @@ namespace AuktionBackend.Repository.Repos
         {
             _context = context;
         }
-        // this works
-        //public List<Auction> GetAllAuctions()
-        //{
-        //    var query = "[dbo].[GetAllAuctions]";
-
-        //    var auctionDictionary = new Dictionary<int, Auction>();
-
-        //    using (IDbConnection db = _context.GetConnection())
-        //    {
-        //        var result = db.Query<Auction, UserConnectDTO, Bid, Auction>(
-        //            query,
-        //            (auction, user, bid) =>
-        //            {
-        //                Auction auctionEntry;
-        //                if (!auctionDictionary.TryGetValue(auction.AuctionId, out auctionEntry))
-        //                {
-        //                    auctionEntry = auction;
-        //                    auctionEntry.Auctionuser = user;
-        //                    auctionEntry.Bids = new List<Bid>();
-        //                    auctionDictionary.Add(auction.AuctionId, auctionEntry);
-        //                }
-
-        //                if (user != null)
-        //                {
-        //                    auctionEntry.Auctionuser = user;
-        //                }
-
-        //                if (bid != null)
-        //                {
-        //                    auctionEntry.Bids.Add(bid);
-        //                }
-
-        //                return auctionEntry;
-        //            },
-        //            splitOn: "AuctionId,UserId,BidId"
-        //        );
-
-        //        var auctions = result.ToList();
-        //        return auctions;
-        //    }
-        //}
+     
         public List<Auction> GetAllAuctions()
         {
             var query = "[dbo].[GetAllAuctions]";
@@ -97,7 +57,6 @@ namespace AuktionBackend.Repository.Repos
                     splitOn: "AuctionId,UserId,BidId"
                 );
 
-                // Retrieve distinct auctions
                 var distinctAuctions = result.GroupBy(a => a.AuctionId).Select(g => g.First()).ToList();
                 return distinctAuctions;
             }
@@ -147,28 +106,7 @@ namespace AuktionBackend.Repository.Repos
             }
         }
 
-        //public Auction GetAuctionByID(int auctionID)
-        //{
-        //    using (IDbConnection db = _context.GetConnection())
-        //    {
-        //        var parameters = new { AuctionID = auctionID };
-        //        var result = db.Query<Auction, UserConnectDTO, Auction>(
-        //            "GetAuctionByIdd",
-        //            (auction, user) =>
-        //            {
-        //                auction.Auctionuser = user;
-        //                return auction;
-        //            },
-        //            parameters,
-        //            splitOn: "UserId",
-        //            commandType: CommandType.StoredProcedure
-        //        ).FirstOrDefault();
-
-        //        return result;
-        //    }
-        //}
-
-
+        
 
 
         public string ChangeAuctionByID(GetAllAuctionsDTO auction)
@@ -196,29 +134,7 @@ namespace AuktionBackend.Repository.Repos
         }
 
 
-        ////public void ChangeAuctionByID(UpdateDTO auction)
-        ////{
-        ////    using (IDbConnection db = _context.GetConnection())
-        ////    {
-        ////        db.Open();
-
-        ////        var parameters = new
-        ////        {
-        ////            AuctionID = auction.AuctionId,
-        ////            auction.Title,
-        ////            auction.Description,
-        ////            auction.Price,
-        ////            auction.StartDate,
-        ////            auction.EndDate,
-        ////            auction.Status,
-        ////            auction.Auctionuser.UserId
-        ////        };
-
-
-        ////        db.Execute("ChangeAuctionByID", parameters, commandType: CommandType.StoredProcedure);
-        ////    }
-        ////}
-
+        
         public void DeleteAuctionByID(int auctionID)
         {
             using (IDbConnection db = _context.GetConnection())
@@ -231,73 +147,7 @@ namespace AuktionBackend.Repository.Repos
             }
         }
 
-        //test 
-        //public Auction GetAuctionByIddD(int auctionID)
-        //{
-        //    using (IDbConnection db = _context.GetConnection())
-        //    {
-        //        var parameters = new { auctionID = auctionID };
-        //        var results = db.Query<Auction, Bid, Auction>(
-        //            "GetAuctionInformation",
-        //            (auction, bid) =>
-        //            {
-        //                auction.Bids = auction.Bids ?? new List<Bid>();
-        //                if (bid != null)
-        //                {
-        //                    auction.Bids.Add(bid);
-        //                }
-        //                return auction;
-        //            },
-        //            parameters,
-        //            splitOn: "UserId",
-        //            commandType: CommandType.StoredProcedure
-        //        );
-
-        //        return results.FirstOrDefault();
-        //    }
-        //}
-
-        //        public Auction GetAuctionByIddD(int auctionID)
-        //        {
-        //{
-        //    using (IDbConnection db = _context.GetConnection())
-        //    {
-        //        var parameters = new { AuctionID = auctionID };
-        //        Auction auction = null;
-
-        //        var result = db.Query<Auction, Bid, Auction>(
-        //            "GetAuctionInformation",
-        //            (auctionResult, bid) =>
-        //            {
-        //                if (auction == null)
-        //                {
-        //                    auction = auctionResult;
-        //                    auction.Bids = new List<Bid>();
-        //                }
-
-        //                if (bid != null)
-        //                {
-        //                    auction.Bids.Add(bid);
-        //                }
-
-        //                return auction;
-        //            },
-        //            parameters,
-        //            splitOn: "UserId",
-        //            commandType: CommandType.StoredProcedure
-        //        );
-
-        //        // If no bids were returned and the auction is closed, ensure that Bids property is initialized
-        //        if (auction.Status == "Closed" && auction.Bids.Count == 0)
-        //        {
-        //            auction.Bids = new List<Bid>();
-        //        }
-
-        //        return result.FirstOrDefault();
-        //    }
-        //}
-
-        //        }
+      
 
         public Auction GetAuctionByIddD(int auctionID)
         {
@@ -329,12 +179,12 @@ namespace AuktionBackend.Repository.Repos
                     commandType: CommandType.StoredProcedure
                 );
 
-                if (auction == null) // Handle case where no auction is found
+                if (auction == null) 
                 {
                     return null;
                 }
 
-                // Check if the auction is closed and no bids were returned
+                
                 if (auction.Status == "Closed" && (auction.Bids == null || auction.Bids.Count == 0))
                 {
                     auction.Bids = new List<Bid>();

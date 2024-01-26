@@ -83,28 +83,6 @@ namespace AuktionBackend.Repository.Repos
                 db.Execute("BidInsert", parameters, commandType: CommandType.StoredProcedure);
             }
         }
-        public User Login(string username, string password)
-        {
-            using (IDbConnection db = _context.GetConnection())
-            {
-                var parameters = new
-                {
-                    UserName = username,
-                    Password = password
-                };
-
-                return db.QueryFirstOrDefault<User>("UserLogin", parameters, commandType: CommandType.StoredProcedure);
-            }
-
-
-        }
-        public string GetUserId(HttpRequest request)
-        {
-            var token = request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
-            var handler = new JwtSecurityTokenHandler();
-            var jsonToken = handler.ReadToken(token) as JwtSecurityToken;
-            var userIdClaim = jsonToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            return userIdClaim;
-        }
+      
     }
 }
