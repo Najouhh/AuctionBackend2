@@ -15,3 +15,4 @@ namespace AuktionBackend.Repository.Interfaces
         Auction GetAuctionByIddD(int auctionID);
     }
 }
+    

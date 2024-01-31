@@ -3,7 +3,7 @@ using AuktionBackend.Models.Entities;
 using AuktionBackend.Repository.Interfaces;
 using AuktionBackend.Repository.Repos;
 
-namespace AuctionBackend2.Services
+namespace AuctionBackend.Services
 {
     public class UserService : IUserRepo
     {
@@ -44,12 +44,23 @@ namespace AuctionBackend2.Services
 
         public UserPostDTO Login(string username, string password)
         {
-             return _userRepo.Login(username, password); 
+            throw new NotImplementedException();
         }
 
         public void UpdateUserByID(User user)
         {
             throw new NotImplementedException();
+        }
+
+        public bool Authenticate(string username, string password)
+        {
+            return username == "user" && password == "pass";
+        }
+
+
+        public bool log(string username, string password)
+        {
+            return _userRepo.Authenticate(username, password);
         }
     }
 }
