@@ -15,6 +15,7 @@ namespace UnitTest
         [Fact]
         public void GetAllUsers_ReturnsUsers()
         {
+            // ARRANGE
             //Arrange
             var AuctionRepo = new Mock<IAuctionRepo>();
             var fakeAuctions = new List<Auction>
