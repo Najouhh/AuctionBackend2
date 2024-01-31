@@ -3,7 +3,7 @@ using AuktionBackend.Repository.Interfaces;
 using AuktionBackend.Repository.Repos;
 using Groupwork_my_version_.Models.DTOS;
 
-namespace AuctionBackend2.Services
+namespace AuctionBackend.Services
 {
     public class AuctionService :IAuctionRepo
     {
