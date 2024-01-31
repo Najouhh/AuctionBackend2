@@ -100,5 +100,10 @@ namespace AuktionBackend.Repository.Repos
             var userIdClaim = jsonToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             return userIdClaim;
         }
+
+        public bool Authenticate(string username, string password)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

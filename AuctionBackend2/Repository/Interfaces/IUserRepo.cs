@@ -13,5 +13,8 @@ namespace AuktionBackend.Repository.Interfaces
         UserPostDTO Login(string username, string password);
         string GetUserId(HttpRequest request);
 
+       bool Authenticate(string username, string password);    
+
+
     }
 }
